@@ -27,8 +27,16 @@ public abstract class ComparableRange<T extends Comparable<T>> implements Compar
         return this.start.compareTo(o.start);
     }
 
-    public Boolean after(Range<T> range)
+    public final Boolean before(Range<T> range)
+    {
+        return this.end.compareTo(range.start()) < 0;
+    }
+    public final Boolean after(Range<T> range)
     {
         return this.start.compareTo(range.end()) > 0;
+    }
+    public final Boolean after(T value)
+    {
+        return this.start.compareTo(value) > 0;
     }
 }

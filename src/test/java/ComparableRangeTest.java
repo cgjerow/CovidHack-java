@@ -57,14 +57,36 @@ public class ComparableRangeTest
     // AFTER
 
     @Test
-    public void afterAndNotAfter()
+    public void valueAfterAndNotAfter()
+    {
+
+        ComparableRange comparableRange1 = new ComparableIntegerRange(1,2);
+
+        assertTrue("Should be after value", comparableRange1.after((Integer)0));
+        assertFalse("Should not be after value", comparableRange1.after((Integer)1));
+        assertFalse("Should not be after value", comparableRange1.after((Integer)3));
+    }
+
+    @Test
+    public void rangeAfterAndNotAfter()
+    {
+        ComparableIntegerRange comparableRange1 = new ComparableIntegerRange(1,2);
+        ComparableIntegerRange comparableRange2 = new ComparableIntegerRange(0,0);
+        ComparableIntegerRange comparableRange3 = new ComparableIntegerRange(1,2);
+
+        assertTrue("Should be after range", comparableRange1.after(comparableRange2));
+        assertFalse("Should not be after range", comparableRange1.after(comparableRange3));
+    }
+
+    @Test
+    public void rangeBeforeAndNotBefore()
     {
         ComparableRange comparableRange1 = new ComparableIntegerRange(1,2);
         ComparableRange comparableRange2 = new ComparableIntegerRange(0,0);
-        ComparableRange comparableRange3 = new ComparableIntegerRange(1,2);
+        ComparableRange comparableRange3 = new ComparableIntegerRange(3,3);
 
-        assertTrue("Range is after", comparableRange1.after(comparableRange2));
-        assertFalse("Range is not after", comparableRange1.after(comparableRange3));
+        assertTrue("Should be before range", comparableRange1.before(comparableRange3));
+        assertFalse("Should not be before range", comparableRange1.before(comparableRange2));
     }
 
 
@@ -75,16 +97,6 @@ public class ComparableRangeTest
         ComparableIntegerRange(Integer start, Integer end)
         {
             super(start, end);
-        }
-
-        @Override
-        public Boolean after(Integer value) {
-            return null;
-        }
-
-        @Override
-        public Boolean before(Range<Integer> range) {
-            return null;
         }
 
         @Override
