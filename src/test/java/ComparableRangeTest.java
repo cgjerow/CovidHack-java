@@ -23,6 +23,20 @@ public class ComparableRangeTest
     }
 
 
+    // GETTERS
+
+    @Test
+    public void startGetter()
+    {
+        assertEquals((Integer)1, new ComparableIntegerRange(1,2).start());
+    }
+    @Test
+    public void endGetter()
+    {
+        assertEquals((Integer)2, new ComparableIntegerRange(1,2).end());
+    }
+
+
 
     // COMPARE TO
 
@@ -53,6 +67,30 @@ public class ComparableRangeTest
     }
 
 
+    // BEFORE
+
+    @Test
+    public void valueBeforeAndNotBefore()
+    {
+
+        ComparableRange comparableRange1 = new ComparableIntegerRange(1,2);
+
+        assertTrue("Should be before value", comparableRange1.before(3));
+        assertFalse("Should not be before value", comparableRange1.before(2));
+        assertFalse("Should not be before value", comparableRange1.before(0));
+    }
+
+    @Test
+    public void rangeBeforeAndNotBefore()
+    {
+        ComparableRange comparableRange1 = new ComparableIntegerRange(1,2);
+        ComparableRange comparableRange2 = new ComparableIntegerRange(0,0);
+        ComparableRange comparableRange3 = new ComparableIntegerRange(3,3);
+
+        assertTrue("Should be before range", comparableRange1.before((Range)comparableRange3));
+        assertFalse("Should not be before range", comparableRange1.before((Range)comparableRange2));
+    }
+
 
     // AFTER
 
@@ -79,28 +117,17 @@ public class ComparableRangeTest
     }
 
 
-    // Before
+
+    // Is Point
 
     @Test
-    public void valueBeforeAndNotBefore()
+    public void isPointAndIsNotPoint()
     {
+        ComparableRange comparableRange1 = new ComparableIntegerRange(1,1);
+        ComparableRange comparableRange2 = new ComparableIntegerRange(1,2);
 
-        ComparableRange comparableRange1 = new ComparableIntegerRange(1,2);
-
-        assertTrue("Should be before value", comparableRange1.before(3));
-        assertFalse("Should not be before value", comparableRange1.before(2));
-        assertFalse("Should not be before value", comparableRange1.before(0));
-    }
-
-    @Test
-    public void rangeBeforeAndNotBefore()
-    {
-        ComparableRange comparableRange1 = new ComparableIntegerRange(1,2);
-        ComparableRange comparableRange2 = new ComparableIntegerRange(0,0);
-        ComparableRange comparableRange3 = new ComparableIntegerRange(3,3);
-
-        assertTrue("Should be before range", comparableRange1.before((Range)comparableRange3));
-        assertFalse("Should not be before range", comparableRange1.before((Range)comparableRange2));
+        assertTrue("Should be point", comparableRange1.isPoint());
+        assertFalse("Should not be point",comparableRange2.isPoint());
     }
 
 
@@ -114,11 +141,6 @@ public class ComparableRangeTest
         }
 
         @Override
-        public Integer end() {
-            return this.end;
-        }
-
-        @Override
         public Boolean includes(Range<Integer> range) {
             return null;
         }
@@ -129,18 +151,8 @@ public class ComparableRangeTest
         }
 
         @Override
-        public Boolean isPoint() {
-            return null;
-        }
-
-        @Override
         public Boolean overlaps(Range<Integer> range) {
             return null;
-        }
-
-        @Override
-        public Integer start() {
-            return this.start;
         }
     }
 }

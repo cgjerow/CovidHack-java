@@ -19,6 +19,15 @@ public abstract class ComparableRange<T extends Comparable<T>> implements Compar
             throw new IllegalArgumentException("Start must be less than or equal to End.");
     }
 
+    public T start()
+    {
+        return this.start;
+    }
+    public T end()
+    {
+        return this.end;
+    }
+
     @Override
     public int compareTo(ComparableRange<T> o)
     {
@@ -26,6 +35,7 @@ public abstract class ComparableRange<T extends Comparable<T>> implements Compar
         if (this.start.compareTo(o.start)==0) return this.end.compareTo(o.end);
         return this.start.compareTo(o.start);
     }
+
 
     public final Boolean before(Range<T> range)
     {
@@ -43,5 +53,11 @@ public abstract class ComparableRange<T extends Comparable<T>> implements Compar
     public final Boolean after(T value)
     {
         return this.start.compareTo(value) > 0;
+    }
+
+
+    public final Boolean isPoint()
+    {
+        return this.start.compareTo(this.end)==0;
     }
 }
