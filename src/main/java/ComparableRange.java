@@ -26,4 +26,9 @@ public abstract class ComparableRange<T extends Comparable<T>> implements Compar
         if (this.start.compareTo(o.start)==0) return this.end.compareTo(o.end);
         return this.start.compareTo(o.start);
     }
+
+    public Boolean after(Range<T> range)
+    {
+        return this.start.compareTo(range.end()) > 0;
+    }
 }

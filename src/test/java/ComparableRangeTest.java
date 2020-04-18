@@ -4,6 +4,9 @@ import static org.junit.Assert.*;
 
 public class ComparableRangeTest
 {
+
+    // CONSTRUCTORS
+
     @Test
     public void testConstructorWithValidIntegers()
     {
@@ -19,6 +22,9 @@ public class ComparableRangeTest
         new ComparableIntegerRange(2,1);
     }
 
+
+
+    // COMPARE TO
 
     @Test
     public void compareToEquals()
@@ -46,17 +52,29 @@ public class ComparableRangeTest
         assert(0 > comparableRange.compareTo(comparableRange1));
     }
 
+
+
+    // AFTER
+
+    @Test
+    public void afterAndNotAfter()
+    {
+        ComparableRange comparableRange1 = new ComparableIntegerRange(1,2);
+        ComparableRange comparableRange2 = new ComparableIntegerRange(0,0);
+        ComparableRange comparableRange3 = new ComparableIntegerRange(1,2);
+
+        assertTrue("Range is after", comparableRange1.after(comparableRange2));
+        assertFalse("Range is not after", comparableRange1.after(comparableRange3));
+    }
+
+
+
     public class ComparableIntegerRange extends ComparableRange<Integer>
     {
 
         ComparableIntegerRange(Integer start, Integer end)
         {
             super(start, end);
-        }
-
-        @Override
-        public Boolean after(Range<Integer> range) {
-            return null;
         }
 
         @Override
@@ -76,7 +94,7 @@ public class ComparableRangeTest
 
         @Override
         public Integer end() {
-            return null;
+            return this.end;
         }
 
         @Override
@@ -101,7 +119,7 @@ public class ComparableRangeTest
 
         @Override
         public Integer start() {
-            return null;
+            return this.start;
         }
     }
 }
