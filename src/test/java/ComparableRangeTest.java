@@ -19,6 +19,33 @@ public class ComparableRangeTest
         new ComparableIntegerRange(2,1);
     }
 
+
+    @Test
+    public void compareToEquals()
+    {
+        ComparableRange comparableRange = new ComparableIntegerRange(1,2);
+        ComparableRange comparableRange1 = new ComparableIntegerRange(1,2);
+        assertEquals(0, comparableRange.compareTo(comparableRange1));
+    }
+
+    @Test
+    public void compareToStartIsLessButEndIsMore()
+    {
+        ComparableRange comparableRange = new ComparableIntegerRange(1,2);
+        ComparableRange comparableRange1 = new ComparableIntegerRange(0,3);
+
+        // Start takes precedence over end for comparison
+        assert(0 < comparableRange.compareTo(comparableRange1));
+    }
+
+    @Test
+    public void compareToStartIsEqualEndIsMore()
+    {
+        ComparableRange comparableRange = new ComparableIntegerRange(1,2);
+        ComparableRange comparableRange1 = new ComparableIntegerRange(1,3);
+        assert(0 > comparableRange.compareTo(comparableRange1));
+    }
+
     public class ComparableIntegerRange extends ComparableRange<Integer>
     {
 
