@@ -62,20 +62,34 @@ public class ComparableRangeTest
 
         ComparableRange comparableRange1 = new ComparableIntegerRange(1,2);
 
-        assertTrue("Should be after value", comparableRange1.after((Integer)0));
-        assertFalse("Should not be after value", comparableRange1.after((Integer)1));
-        assertFalse("Should not be after value", comparableRange1.after((Integer)3));
+        assertTrue("Should be after value", comparableRange1.after(0));
+        assertFalse("Should not be after value", comparableRange1.after(1));
+        assertFalse("Should not be after value", comparableRange1.after(3));
     }
 
     @Test
     public void rangeAfterAndNotAfter()
     {
-        ComparableIntegerRange comparableRange1 = new ComparableIntegerRange(1,2);
-        ComparableIntegerRange comparableRange2 = new ComparableIntegerRange(0,0);
-        ComparableIntegerRange comparableRange3 = new ComparableIntegerRange(1,2);
+        ComparableRange comparableRange1 = new ComparableIntegerRange(1,2);
+        ComparableRange comparableRange2 = new ComparableIntegerRange(0,0);
+        ComparableRange comparableRange3 = new ComparableIntegerRange(1,2);
 
-        assertTrue("Should be after range", comparableRange1.after(comparableRange2));
-        assertFalse("Should not be after range", comparableRange1.after(comparableRange3));
+        assertTrue("Should be after range", comparableRange1.after((Range)comparableRange2));
+        assertFalse("Should not be after range", comparableRange1.after((Range)comparableRange3));
+    }
+
+
+    // Before
+
+    @Test
+    public void valueBeforeAndNotBefore()
+    {
+
+        ComparableRange comparableRange1 = new ComparableIntegerRange(1,2);
+
+        assertTrue("Should be before value", comparableRange1.before(3));
+        assertFalse("Should not be before value", comparableRange1.before(2));
+        assertFalse("Should not be before value", comparableRange1.before(0));
     }
 
     @Test
@@ -85,8 +99,8 @@ public class ComparableRangeTest
         ComparableRange comparableRange2 = new ComparableIntegerRange(0,0);
         ComparableRange comparableRange3 = new ComparableIntegerRange(3,3);
 
-        assertTrue("Should be before range", comparableRange1.before(comparableRange3));
-        assertFalse("Should not be before range", comparableRange1.before(comparableRange2));
+        assertTrue("Should be before range", comparableRange1.before((Range)comparableRange3));
+        assertFalse("Should not be before range", comparableRange1.before((Range)comparableRange2));
     }
 
 
@@ -97,11 +111,6 @@ public class ComparableRangeTest
         ComparableIntegerRange(Integer start, Integer end)
         {
             super(start, end);
-        }
-
-        @Override
-        public Boolean before(Integer value) {
-            return null;
         }
 
         @Override
