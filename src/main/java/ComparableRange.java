@@ -4,12 +4,14 @@ public abstract class ComparableRange<T extends Comparable<T>> implements Compar
 {
     protected final T end;
     protected final T start;
+    protected final boolean isPoint;
 
     public ComparableRange(T start, T end)
     {
         this.start = start;
         this.end = end;
         this.validate();
+        this.isPoint = start.equals(end);
     }
 
     private void validate()
