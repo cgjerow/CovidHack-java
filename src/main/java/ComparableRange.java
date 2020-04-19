@@ -3,7 +3,6 @@
 public abstract class ComparableRange<T extends Comparable<T>> implements Comparable<ComparableRange<T>>, Range<T>
 {
     protected T end;
-    protected Boolean isPoint;
     protected T start;
 
     public ComparableRange(T start, T end)
