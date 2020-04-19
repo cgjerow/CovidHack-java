@@ -2,8 +2,8 @@
 
 public abstract class ComparableRange<T extends Comparable<T>> implements Comparable<ComparableRange<T>>, Range<T>
 {
-    protected T end;
-    protected T start;
+    protected final T end;
+    protected final T start;
 
     public ComparableRange(T start, T end)
     {
