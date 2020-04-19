@@ -69,13 +69,23 @@ public abstract class ComparableRange<T extends Comparable<T>> implements Compar
 
 
 
+
     public final Boolean includes(Range<T> range)
     {
         return this.includes(range.start()) && this.includes(range.end());
     }
 
-    public Boolean includes(T value)
+    public final Boolean includes(T value)
     {
-        return this.start().compareTo(value) < 1 && this.end.compareTo(value)==1;
+        return this.start.compareTo(value) < 1 && this.end.compareTo(value) > -1;
+    }
+
+
+
+
+    public final Boolean overlaps(Range<T> range)
+    {
+        // Contains start or end of range OR range
+        return this.includes(range.start()) || this.includes(range.end()) || range.includes(this);
     }
 }

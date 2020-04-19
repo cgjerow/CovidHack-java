@@ -144,30 +144,30 @@ public class ComparableRangeTest
         assertFalse("Should not include range", comparableRange1.includes((Range)comparableRange3));
         assertFalse("Should not include range", comparableRange1.includes((Range)comparableRange4));
         assertFalse("Should not include range", comparableRange1.includes((Range)comparableRange5));
+
     }
     @Test
     public void valueIncludesAndDoesNotInclude()
     {
         ComparableRange comparableRange1 = new ComparableIntegerRange(1,10);
 
-        assertTrue("Should include range", comparableRange1.includes(5));
-        assertFalse("Should not include range", comparableRange1.includes(0));
-        assertFalse("Should not include range", comparableRange1.includes(14));
+        assertTrue("Should include value", comparableRange1.includes(5));
+        assertFalse("Should not include value", comparableRange1.includes(0));
+        assertFalse("Should not include value", comparableRange1.includes(14));
+
+        // Edge cases
+        assertTrue("Should include value", comparableRange1.includes(1));
+        assertTrue("Should include value", comparableRange1.includes(10));
+
     }
 
 
 
     public class ComparableIntegerRange extends ComparableRange<Integer>
     {
-
         ComparableIntegerRange(Integer start, Integer end)
         {
             super(start, end);
-        }
-
-        @Override
-        public Boolean overlaps(Range<Integer> range) {
-            return null;
         }
     }
 }
