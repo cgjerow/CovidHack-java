@@ -1,4 +1,23 @@
-// Interface modeled after https://ci.apache.org/projects/ofbiz/site/javadocs/org/ofbiz/base/lang/Range.html
+/*******************************************************************************
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ *
+ * NOTICE: This has been modified by the distributor
+ *******************************************************************************/
 
 public abstract class ComparableRange<T extends Comparable<T>> implements Comparable<ComparableRange<T>>, Range<T>
 {
@@ -8,16 +27,11 @@ public abstract class ComparableRange<T extends Comparable<T>> implements Compar
 
     public ComparableRange(T start, T end)
     {
+        if (start.compareTo(end)>0)
+            throw new IllegalArgumentException("Start must be less than or equal to End.");
         this.start = start;
         this.end = end;
-        this.validate();
         this.isPoint = start.equals(end);
-    }
-
-    private void validate()
-    {
-        if (this.start.compareTo(this.end)>0)
-            throw new IllegalArgumentException("Start must be less than or equal to End.");
     }
 
     public T start()
