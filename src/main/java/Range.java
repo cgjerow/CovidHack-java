@@ -1,14 +1,14 @@
 // modeled after https://ci.apache.org/projects/ofbiz/site/javadocs/org/ofbiz/base/lang/Range.html
 public interface Range<T>
 {
-    Boolean after(Range<T> range);
-    Boolean after(T value);
-    Boolean before(Range<T> range);
-    Boolean before(T value);
+    boolean after(Range<T> range);
+    boolean after(T value);
+    boolean before(Range<T> range);
+    boolean before(T value);
     T end();
-    Boolean includes(Range<T> range);
-    Boolean includes(T value);
-    Boolean isPoint();
-    Boolean overlaps(Range<T> range);
+    boolean includes(Range<T> range);
+    boolean includes(T value);
+    boolean isPoint();
+    boolean overlaps(Range<T> range);
     T start();
 }
