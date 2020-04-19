@@ -28,6 +28,8 @@ public abstract class ComparableRange<T extends Comparable<T>> implements Compar
         return this.end;
     }
 
+
+
     @Override
     public int compareTo(ComparableRange<T> o)
     {
@@ -35,6 +37,8 @@ public abstract class ComparableRange<T extends Comparable<T>> implements Compar
         if (this.start.compareTo(o.start)==0) return this.end.compareTo(o.end);
         return this.start.compareTo(o.start);
     }
+
+
 
 
     public final Boolean before(Range<T> range)
@@ -56,8 +60,22 @@ public abstract class ComparableRange<T extends Comparable<T>> implements Compar
     }
 
 
+
+
     public final Boolean isPoint()
     {
         return this.start.compareTo(this.end)==0;
+    }
+
+
+
+    public final Boolean includes(Range<T> range)
+    {
+        return this.includes(range.start()) && this.includes(range.end());
+    }
+
+    public Boolean includes(T value)
+    {
+        return this.start().compareTo(value) < 1 && this.end.compareTo(value)==1;
     }
 }

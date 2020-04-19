@@ -15,12 +15,12 @@ public class ComparableRangeTest
         assertNotNull(comparableRange);
         assertNotNull(comparableRange1);
     }
-
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorWithInvertedIntegers()
     {
         new ComparableIntegerRange(2,1);
     }
+
 
 
     // GETTERS
@@ -47,7 +47,6 @@ public class ComparableRangeTest
         ComparableRange comparableRange1 = new ComparableIntegerRange(1,2);
         assertEquals(0, comparableRange.compareTo(comparableRange1));
     }
-
     @Test
     public void compareToStartIsLessButEndIsMore()
     {
@@ -57,7 +56,6 @@ public class ComparableRangeTest
         // Start takes precedence over end for comparison
         assert(0 < comparableRange.compareTo(comparableRange1));
     }
-
     @Test
     public void compareToStartIsEqualEndIsMore()
     {
@@ -65,6 +63,7 @@ public class ComparableRangeTest
         ComparableRange comparableRange1 = new ComparableIntegerRange(1,3);
         assert(0 > comparableRange.compareTo(comparableRange1));
     }
+
 
 
     // BEFORE
@@ -79,7 +78,6 @@ public class ComparableRangeTest
         assertFalse("Should not be before value", comparableRange1.before(2));
         assertFalse("Should not be before value", comparableRange1.before(0));
     }
-
     @Test
     public void rangeBeforeAndNotBefore()
     {
@@ -90,6 +88,7 @@ public class ComparableRangeTest
         assertTrue("Should be before range", comparableRange1.before((Range)comparableRange3));
         assertFalse("Should not be before range", comparableRange1.before((Range)comparableRange2));
     }
+
 
 
     // AFTER
@@ -104,7 +103,6 @@ public class ComparableRangeTest
         assertFalse("Should not be after value", comparableRange1.after(1));
         assertFalse("Should not be after value", comparableRange1.after(3));
     }
-
     @Test
     public void rangeAfterAndNotAfter()
     {
@@ -118,7 +116,7 @@ public class ComparableRangeTest
 
 
 
-    // Is Point
+    // IS POINT
 
     @Test
     public void isPointAndIsNotPoint()
@@ -131,6 +129,33 @@ public class ComparableRangeTest
     }
 
 
+    // INCLUDES
+
+    @Test
+    public void rangeIncludesAndDoesNotInclude()
+    {
+        ComparableRange comparableRange1 = new ComparableIntegerRange(1,10);
+        ComparableRange comparableRange2 = new ComparableIntegerRange(2,2);
+        ComparableRange comparableRange3 = new ComparableIntegerRange(0,5);
+        ComparableRange comparableRange4 = new ComparableIntegerRange(5,15);
+        ComparableRange comparableRange5 = new ComparableIntegerRange(100,101);
+
+        assertTrue("Should include range", comparableRange1.includes((Range)comparableRange2));
+        assertFalse("Should not include range", comparableRange1.includes((Range)comparableRange3));
+        assertFalse("Should not include range", comparableRange1.includes((Range)comparableRange4));
+        assertFalse("Should not include range", comparableRange1.includes((Range)comparableRange5));
+    }
+    @Test
+    public void valueIncludesAndDoesNotInclude()
+    {
+        ComparableRange comparableRange1 = new ComparableIntegerRange(1,10);
+
+        assertTrue("Should include range", comparableRange1.includes(5));
+        assertFalse("Should not include range", comparableRange1.includes(0));
+        assertFalse("Should not include range", comparableRange1.includes(14));
+    }
+
+
 
     public class ComparableIntegerRange extends ComparableRange<Integer>
     {
@@ -138,16 +163,6 @@ public class ComparableRangeTest
         ComparableIntegerRange(Integer start, Integer end)
         {
             super(start, end);
-        }
-
-        @Override
-        public Boolean includes(Range<Integer> range) {
-            return null;
-        }
-
-        @Override
-        public Boolean includes(Integer value) {
-            return null;
         }
 
         @Override
