@@ -139,12 +139,15 @@ public class ComparableRangeTest
         ComparableRange comparableRange3 = new ComparableIntegerRange(0,5);
         ComparableRange comparableRange4 = new ComparableIntegerRange(5,15);
         ComparableRange comparableRange5 = new ComparableIntegerRange(100,101);
+        ComparableRange comparableRange6 = new ComparableIntegerRange(1,10);
 
         assertTrue("Should include range", comparableRange1.includes((Range)comparableRange2));
         assertFalse("Should not include range", comparableRange1.includes((Range)comparableRange3));
         assertFalse("Should not include range", comparableRange1.includes((Range)comparableRange4));
         assertFalse("Should not include range", comparableRange1.includes((Range)comparableRange5));
 
+        // Edge Case
+        assertTrue("Should include range", comparableRange1.includes((Range)comparableRange6));
     }
     @Test
     public void valueIncludesAndDoesNotInclude()
@@ -162,6 +165,29 @@ public class ComparableRangeTest
     }
 
 
+
+    // OVERLAPS
+
+    @Test
+    public void rangeOverlaps()
+    {
+        ComparableRange comparableRange1 = new ComparableIntegerRange(1,10);
+        ComparableRange comparableRange2 = new ComparableIntegerRange(1,10);
+        ComparableRange comparableRange3 = new ComparableIntegerRange(0,1);
+        ComparableRange comparableRange4 = new ComparableIntegerRange(0,5);
+        ComparableRange comparableRange5 = new ComparableIntegerRange(10,11);
+        ComparableRange comparableRange6 = new ComparableIntegerRange(10,15);
+        ComparableRange comparableRange7 = new ComparableIntegerRange(5,15);
+        ComparableRange comparableRange8 = new ComparableIntegerRange(100,101);
+
+        assertTrue("Should overlap range", comparableRange1.overlaps(comparableRange2));
+        assertTrue("Should overlap range", comparableRange1.overlaps(comparableRange3));
+        assertTrue("Should overlap range", comparableRange1.overlaps(comparableRange4));
+        assertTrue("Should overlap range", comparableRange1.overlaps(comparableRange5));
+        assertTrue("Should overlap range", comparableRange1.overlaps(comparableRange6));
+        assertTrue("Should overlap range", comparableRange1.overlaps(comparableRange7));
+        assertFalse("Should not overlap range", comparableRange1.overlaps(comparableRange8));
+    }
 
     public class ComparableIntegerRange extends ComparableRange<Integer>
     {
