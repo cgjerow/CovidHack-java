@@ -25,6 +25,10 @@ public abstract class ComparableRange<T extends Comparable<T>> implements Compar
     protected final T start;
     protected final boolean isPoint;
 
+    public ComparableRange(T point)
+    {
+        this(point,point);
+    }
     public ComparableRange(T start, T end)
     {
         if (start.compareTo(end)>0)

@@ -15,11 +15,19 @@ public class ComparableRangeTest
         assertNotNull(comparableRange);
         assertNotNull(comparableRange1);
     }
+    @Test
+    public void testPointConstructor()
+    {
+        ComparableRange comparableRange = new ComparableIntegerRange(1);
+        assertNotNull(comparableRange);
+        assertTrue("Is Point",comparableRange.isPoint());
+    }
     @Test(expected = IllegalArgumentException.class)
     public void testConstructorWithInvertedIntegers()
     {
         new ComparableIntegerRange(2,1);
     }
+
 
 
 
@@ -191,6 +199,10 @@ public class ComparableRangeTest
 
     public class ComparableIntegerRange extends ComparableRange<Integer>
     {
+        ComparableIntegerRange(Integer point)
+        {
+            super(point);
+        }
         ComparableIntegerRange(Integer start, Integer end)
         {
             super(start, end);
